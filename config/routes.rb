@@ -1,41 +1,35 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'groups/index'
-    get 'groups/show'
+    root to: 'homes#top'
+    resources :posts, only: [:index, :show] do
+      resources :comments, only: [:destroy]
+    end
+    resources :users, only: [:index, :show, :update] do
+      patch 'is_freezed' => 'users#is_freezed'
+    end
+    resources :groups, only: [:index, :show] do
+      get 'chat' => 'groups#chat', on: :member
+    end
   end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
+
+  scope module: :public do
+    root to: 'homes#top'
+    get 'about' => 'homes#about'
+    resources :posts, except: [:edit, :update] do
+      resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+    end
+    resources :users, only: [:show, :edit, :update] do
+      get 'favorites' => 'favorites#index', on: :member
+      get 'unsubscribe' => 'users#unsubscribe'
+      patch 'is_deleted' => 'users#is_deleted'
+    end
+    
+    resources :groups, except: [:destroy] do
+      get 'chat' => 'groups#chat', on: :member
+    end
   end
-  namespace :admin do
-    get 'posts/index'
-    get 'posts/show'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'groups/index'
-    get 'groups/show'
-    get 'groups/new'
-    get 'groups/edit'
-  end
-  namespace :public do
-    get 'users/show'
-    get 'users/edit'
-  end
-  namespace :public do
-    get 'favorites/index'
-  end
-  namespace :public do
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/new'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
