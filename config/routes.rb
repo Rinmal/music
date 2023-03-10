@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
+    get 'posts/tag/:body' => 'posts#tag', as: :tag
     resources :users, only: [:show, :edit, :update] do
       get 'favorites' => 'favorites#index', on: :member
       get 'unsubscribe' => 'users#unsubscribe'

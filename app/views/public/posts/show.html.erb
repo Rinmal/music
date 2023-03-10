@@ -8,6 +8,6 @@
     <% end %>
   </div>
   <div class="post-body">
-    <%= @post.body %>
+    <%= render_with_tags(@post.body) %>
   </div>
 </div>

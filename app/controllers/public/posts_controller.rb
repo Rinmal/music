@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+
   def index
     @posts = Post.all
   end
@@ -25,6 +26,14 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+  def tag
+    @user = current_user
+    @tag = Tag.find_by(body: params[:body])
+    @posts = @tag.posts
+    # @post = @tag.posts.page(params[:page])
+
   end
 
   private
