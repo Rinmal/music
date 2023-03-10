@@ -1,0 +1,19 @@
+<div class="comment-index">
+  <% if comments.any? %>
+    <% comments.each do |comment| %>
+      <div class="profile">
+        <%= image_tag comment.user.get_profile_image(50,50) %>
+        <%= comment.user.name %>
+        <% if comment.user == current_user %>
+          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete,
+            data: {confirm: '削除しますか？'},class: 'btn btn-sm btn-danger', remote: false %>
+        <% end %>
+      </div>
+      <div class="comment">
+        <%= comment.comment %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>コメントはありません</p>
+  <% end %>
+</div>
