@@ -19,4 +19,10 @@
       <% end %>
     <% end %>
   </div>
+  <div class="send-comment">
+    <%= render 'public/comments/form', post: @post, comment: @comment %>
+  </div>
+</div>
+<div class="comments">
+  <%= render 'public/comments/index', comments: @comments %>
 </div>
