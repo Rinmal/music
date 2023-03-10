@@ -1,5 +1,7 @@
 class Public::FavoritesController < ApplicationController
   def index
+    favorites = Favorite.where(user_id: params[:user_id]).pluck(:post_id)
+    @posts = Post.find(favorites)
   end
 
   def create
