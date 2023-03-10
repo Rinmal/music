@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       get 'unsubscribe' => 'users#unsubscribe'
       patch 'is_deleted' => 'users#is_deleted'
+      get 'favorites' => 'favorites#index'
     end
 
     resources :groups, except: [:destroy] do
