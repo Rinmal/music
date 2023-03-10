@@ -38,7 +38,6 @@ Rails.application.routes.draw do
     get 'posts/tag/:body' => 'posts#tag', as: :tag
 
     resources :users, only: [:show, :edit, :update] do
-      get 'favorites' => 'favorites#index', on: :member
       get 'unsubscribe' => 'users#unsubscribe'
       patch 'is_deleted' => 'users#is_deleted'
     end

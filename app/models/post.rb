@@ -17,13 +17,17 @@ class Post < ApplicationRecord
       post.tags << tag
     end
   end
-  
+
   def self.search(search)
     if search != nil
       Post.where('body LIKE(?)' , "%#{search}%")
     else
       Post.all
     end
+  end
+
+  def favorited_by?(user)
+    self.favorites.exists?(user_id: user.id)
   end
 
 end

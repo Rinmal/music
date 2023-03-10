@@ -4,6 +4,15 @@
       <%= image_tag tweet.user.get_profile_image(50,50),class: 'rounded-circle' %>
       <%= tweet.user.name %>
       <%= tweet.body %>
+      <% if tweet.favorited_by?(current_user) %>
+        <%= link_to post_favorites_path(tweet), method: :delete, remote: false do %>
+          ♥︎<%= tweet.favorites.count %>
+        <% end %>
+      <% else %>
+        <%= link_to post_favorites_path(tweet), method: :post, remote: false do %>
+          ♡<%= tweet.favorites.count %>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

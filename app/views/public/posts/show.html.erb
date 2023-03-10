@@ -9,5 +9,14 @@
   </div>
   <div class="post-body">
     <%= render_with_tags(@post.body) %>
+    <% if @post.favorited_by?(current_user) %>
+      <%= link_to post_favorites_path(@post), method: :delete, remote: false do %>
+        ♥︎<%= @post.favorites.count %>
+      <% end %>
+    <% else %>
+      <%= link_to post_favorites_path(@post), method: :post, remote: false do %>
+        ♡<%= @post.favorites.count %>
+      <% end %>
+    <% end %>
   </div>
 </div>
