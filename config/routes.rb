@@ -43,7 +43,8 @@ Rails.application.routes.draw do
       get 'favorites' => 'favorites#index'
     end
 
-    resources :groups, except: [:destroy] do
+    resources :groups do
+      get "join" => "groups#join"
       get 'chat' => 'groups#chat', on: :member
     end
 

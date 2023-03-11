@@ -2,6 +2,10 @@ class Group < ApplicationRecord
   has_many :entries
   has_many :users, through: :entries
 
+  with_options presence: true do
+    validates :name
+    validates :introduction
+  end
   has_one_attached :group_image
 
   def get_group_image(width,height)
