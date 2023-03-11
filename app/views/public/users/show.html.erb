@@ -2,8 +2,10 @@
 <div class="profile">
   <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
   <%= @user.name %>
-  <%= link_to edit_user_path do %>
-    <i class="fa-solid fa-gear"></i>
+  <% if @user.id == current_user.id %>
+    <%= link_to edit_user_path do %>
+      <i class="fa-solid fa-gear"></i>
+    <% end %>
   <% end %>
   <%= @user.introduction %>
   <%= link_to "いいね一覧", user_favorites_path(@user) %>
