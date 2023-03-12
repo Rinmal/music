@@ -20,7 +20,7 @@
 <div class="group">
   <% if @groups.any? %>
     <% @groups.each do |group| %>
-      <%= image_tag group.group_image(50,50) %>
+      <%= image_tag group.get_group_image(50,50) %>
       <%= group.name %>
     <% end %>
   <% else %>
