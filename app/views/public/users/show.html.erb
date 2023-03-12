@@ -2,7 +2,7 @@
 <div class="profile">
   <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
   <%= @user.name %>
-  <% if @user.id == current_user.id %>
+  <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
     <%= link_to edit_user_path do %>
       <i class="fa-solid fa-gear"></i>
     <% end %>

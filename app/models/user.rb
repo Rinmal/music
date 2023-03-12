@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :groups, through: :entries
   has_many :messages, dependent: :destroy
 
+  validates :name, length: {minimum: 2, maximum: 20 },uniqueness: true
+  validates :introduction, length: {maximum: 50 }
+
   def get_profile_image(width, height)
     unless profile_image.attached?
      file_path = Rails.root.join('app/assets/images/onpu.jpg')
@@ -20,4 +23,12 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  def self.guest
+    find_or_create_by!(name: 'ゲストユーザー', email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.email = "guest@example.com"
+    end
+  end
+
 end
