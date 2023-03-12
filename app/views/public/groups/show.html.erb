@@ -1,0 +1,46 @@
+<h1>グループ : <%= @group.name %></h1>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td><%= image_tag @group.get_group_image(80,80) %></td>
+      <td><%= @group.name %></td>
+      <td><%= @group.introduction %></td>
+      <td>
+        <!--オーナーor参加者or未参加者で切り替え-->
+        <% if @group.owner_id == current_user.id %>
+          <%= link_to chat_group_path(@group) do %>
+            <i class="fa-regular fa-comments"></i>
+          <% end %>
+          <%= link_to edit_group_path(@group) do %>
+            <i class="fa-solid fa-gear"></i>
+          <% end %>
+        <% elsif @group.users.include?(current_user) %>
+          <%= link_to chat_group_path(@group) do %>
+            <i class="fa-regular fa-comments"></i>
+          <% end %>
+          <%= link_to "退室", group_path(@group), method: :delete, class: 'btn btn-sm btn-denger' %>
+        <% else %>
+          <%= link_to "参加", group_join_path(@group), class: 'btn btn-sm' %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="introduction">
+  <%= @group.introduction %>
+</div>
+
+<div class="users">
+  <h3>参加者</h3>
+  <table class="table">
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_profile_image(50,50) %></td>
+          <td><%= user.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

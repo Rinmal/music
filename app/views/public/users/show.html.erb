@@ -1,0 +1,29 @@
+<h1>マイページ</h1>
+<div class="profile">
+  <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
+  <%= @user.name %>
+  <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
+    <%= link_to edit_user_path do %>
+      <i class="fa-solid fa-gear"></i>
+    <% end %>
+  <% end %>
+  <%= @user.introduction %>
+  <%= link_to "いいね一覧", user_favorites_path(@user) %>
+</div>
+<div class="posts">
+  <% if @posts.any? %>
+    <%= render 'public/posts/index', posts: @posts %>
+  <% else %>
+    <p>まだ投稿はありません</p>
+  <% end %>
+</div>
+<div class="group">
+  <% if @groups.any? %>
+    <% @groups.each do |group| %>
+      <%= image_tag group.get_group_image(50,50) %>
+      <%= group.name %>
+    <% end %>
+  <% else %>
+    <p>参加グループはありません</p>
+  <% end %>
+</div>

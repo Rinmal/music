@@ -1,0 +1,40 @@
+<h1>グループ一覧</h1>
+<%= link_to new_group_path do %>
+  <i class="fa-solid fa-circle-plus h2"></i>
+<% end %>
+
+<div class="joined-groups">
+  <h2>参加グループ</h2>
+  <table class="table">
+    <tbody>
+      <% @joinedgroups.each do |join| %>
+        <tr>
+          <td><%= image_tag join.get_group_image(50,50) %></td>
+          <td>
+            <%= link_to group_path(join.id) do %>
+              <%= join.name %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="groups">
+  <h2>すべてのグループ</h2>
+  <table class="table">
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= image_tag group.get_group_image(50,50) %></td>
+          <td>
+            <%= link_to group_path(group.id) do %>
+              <%= group.name %>
+            <% end %>
+          </td>
+        </tr>
+      <% end  %>
+    </tbody>
+  </table>
+</div>
