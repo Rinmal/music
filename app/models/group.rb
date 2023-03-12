@@ -1,6 +1,7 @@
 class Group < ApplicationRecord
   has_many :entries
   has_many :users, through: :entries
+  has_many :messages, dependent: :destroy
 
   with_options presence: true do
     validates :name

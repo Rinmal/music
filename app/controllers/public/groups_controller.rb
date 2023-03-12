@@ -51,6 +51,16 @@ class Public::GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def chat
+    @group = Group.find_by(id: params[:id])
+    if @group.present?
+      @messages = @group.messages
+      @message = Message.new
+    else
+      redirect_to posts_path
+    end
+  end
+
   private
 
   def group_params

@@ -7,13 +7,18 @@
       <td><%= @group.name %></td>
       <td><%= @group.introduction %></td>
       <td>
+        <!--オーナーor参加者or未参加者で切り替え-->
         <% if @group.owner_id == current_user.id %>
-          <!--チャットに飛ぶリンクつける-->
+          <%= link_to chat_group_path(@group) do %>
+            <i class="fa-regular fa-comments"></i>
+          <% end %>
           <%= link_to edit_group_path(@group) do %>
             <i class="fa-solid fa-gear"></i>
           <% end %>
         <% elsif @group.users.include?(current_user) %>
-          <!--チャットに飛ぶリンクつける-->
+          <%= link_to chat_group_path(@group) do %>
+            <i class="fa-regular fa-comments"></i>
+          <% end %>
           <%= link_to "退室", group_path(@group), method: :delete, class: 'btn btn-sm btn-denger' %>
         <% else %>
           <%= link_to "参加", group_join_path(@group), class: 'btn btn-sm' %>
