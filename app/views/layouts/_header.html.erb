@@ -16,7 +16,20 @@
     <li>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     </li>
-
+  <% elsif admin_signed_in? %>
+    <br>
+    <li>
+      <%= link_to "ユーザー一覧", admin_users_path %>
+    </li>
+    <li>
+      <%= link_to "投稿一覧", admin_posts_path %>
+    </li>
+    <li>
+      <%= link_to "グループ一覧", admin_groups_path %>
+    </li>
+    <li>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+    </li>
   <% else %>
   <li>
     <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, class: 'btn btn-lg', method: :post %>
