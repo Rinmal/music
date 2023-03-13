@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @post.comments
   end
 
   def new
@@ -33,11 +33,9 @@ class Public::PostsController < ApplicationController
   end
 
   def tag
-    @user = current_user
     @tag = Tag.find_by(body: params[:body])
     @posts = @tag.posts
     # @post = @tag.posts.page(params[:page])
-
   end
 
   private

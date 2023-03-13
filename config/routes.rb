@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
     end
 
+    get 'posts/tag/:body' => 'posts#tag', as: :tag
+
     resources :users, only: [:index, :show, :update] do
       patch 'is_freezed' => 'users#is_freezed'
     end
@@ -26,6 +28,9 @@ Rails.application.routes.draw do
     resources :groups, only: [:index, :show] do
       get 'chat' => 'groups#chat', on: :member
     end
+
+    get 'search' => 'searches#search'
+    resources :messages, only: [:destroy]
 
   end
 

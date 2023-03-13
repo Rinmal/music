@@ -1,2 +1,18 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<h1>投稿</h1>
+
+<div class="post">
+  <div class="profile">
+    <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+    <%= @post.user.name %>
+    <% if @post.user == current_user %>
+      <%= link_to "削除", post_path(@post.id), class: 'btn btn-danger btn-sm', method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% end %>
+  </div>
+  <div class="post-body">
+    <%= render_with_admin_tags(@post.body) %>
+  </div>
+</div>
+
+<div class="comments">
+  <!--%= render 'public/comments/index', comments: @comments %>-->
+</div>

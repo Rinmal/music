@@ -1,0 +1,9 @@
+<% posts.each do |tweet| %>
+  <%= link_to admin_post_path(tweet) do %>
+    <div>
+      <%= image_tag tweet.user.get_profile_image(50,50),class: 'rounded-circle' %>
+      <%= tweet.user.name %>
+      <%= tweet.body %>
+    </div>
+  <% end %>
+<% end %>
