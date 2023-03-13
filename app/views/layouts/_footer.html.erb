@@ -1,4 +1,8 @@
 <footer>
-  <%= render "/public/searches/search" %>
+  <% if user_signed_in? %>
+    <%= render "/public/searches/search" %>
+  <% elsif admin_signed_in? %>
+    <%= render "/admin/searches/search" %>
+  <% end %>
   <p>This is Footer thank you!</p>
 </footer>
