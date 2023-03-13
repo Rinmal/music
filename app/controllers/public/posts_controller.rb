@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :is_user_frozen, except: [:index]
 
   def index
     @posts = Post.all.order('created_at DESC')
@@ -42,6 +44,13 @@ class Public::PostsController < ApplicationController
 
   def post_params
      params.require(:post).permit(:body)
+  end
+
+  def is_user_frozen
+    @user = current_user
+    if @user.is_frozen == true
+      redirect_to posts_path, alert: 'このアカウントは停止されました'
+    end
   end
 
 end

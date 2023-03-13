@@ -1,2 +1,35 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="profile">
+  <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
+  <%= @user.name %>
+  <% if admin_signed_in? %>
+    <%= form_with model: @user, url: admin_user_path(@user) do |f| %>
+      <p class="col-md-2">会員ステータス</p>
+        <%= f.radio_button :is_frozen, false %>
+        <%= f.label :is_frozen, "有効" %>
+
+        <%= f.radio_button :is_frozen, true %>
+        <%= f.label :is_frozen, "停止" %>
+
+        <%= f.submit "更新", class: 'btn btn-sm btn-success' %>
+    <% end %>
+  <% end %>
+  <%= @user.introduction %>
+</div>
+<div class="posts">
+  <% if @posts.any? %>
+    <%= render 'admin/posts/index', posts: @posts %>
+  <% else %>
+    <p>まだ投稿はありません</p>
+  <% end %>
+</div>
+<div class="group">
+  <% if @groups.any? %>
+    <% @groups.each do |group| %>
+      <%= image_tag group.get_group_image(50,50) %>
+      <%= group.name %>
+    <% end %>
+  <% else %>
+    <p>参加グループはありません</p>
+  <% end %>
+</div>
+
