@@ -1,6 +1,8 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
+  before_action :is_user_frozen
 
   def show
     @user = User.find(params[:id])
@@ -38,6 +40,13 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.name == "ゲストユーザー"
       redirect_to user_path(current_user), notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません'
+    end
+  end
+
+  def is_user_frozen
+    @user = current_user
+    if @user.is_frozen == true
+      redirect_to posts_path, alert: 'このアカウントは停止されました'
     end
   end
 
