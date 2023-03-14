@@ -16,6 +16,9 @@
     <li>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     </li>
+    <li>
+      <%= link_to "退会する", user_unsubscribe_path(current_user) %>
+    </li>
   <% elsif admin_signed_in? %>
     <br>
     <li>
