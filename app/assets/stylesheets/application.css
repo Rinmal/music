@@ -13,3 +13,51 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  position: fixed;
+  border-right:1px solid #000000;
+}
+.header-item {
+
+}
+
+.search-box {
+  border-left:1px solid #000000;
+}
+
+.search_form {
+  position: fixed;
+}
+
+@media screen and (max-width:992px) {
+
+  header {
+    padding: 0;
+
+
+  }
+
+  .header-item {
+    top: 15px;
+    width: 100%;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #000;
+  }
+
+  li span {
+    display: none;
+  }
+
+  .search_form {
+    position: fixed;
+    top: 50px;
+    right: 0;
+  }
+}
