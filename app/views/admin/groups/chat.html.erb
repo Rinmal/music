@@ -1,0 +1,18 @@
+<h1><%= @group.name %></h1>
+<div class="chat">
+
+  <% @messages.each do |message| %>
+    <div class="other-messages">
+      <div class="chat-face">
+        <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
+        <%= message.user.name %>
+      </div>
+      <div class="chat-fukidashi">
+        <strong><%= message.message %></strong><br>
+        <%= message.created_at.strftime("%m-%d %H:%M") %>
+        <%= link_to admin_message_path(message), method: :delete do %>
+          <i class="fa-solid fa-xmark"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
