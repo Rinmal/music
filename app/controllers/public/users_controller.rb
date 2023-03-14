@@ -23,6 +23,16 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def is_deleted
+    @user = current_user
+    if @user.update(is_deleted: true)
+      reset_session
+      redirect_to root_path, notice: "退会しました"
+    else
+      render "unsubscribe"
+    end
+  end
+
   private
 
   def user_params
