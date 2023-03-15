@@ -6,17 +6,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="row">
     <%= render 'layouts/header' %>
-    <main>
+    <%= render 'layouts/search' %>
+    <main class="main col-lg-7 order-lg-2", style="min-height: 100vh">
       <p id="notice"><%= notice %></p>
       <p id="alert", class="bg-danger text-white"><%= alert %></p>
       <%= yield %>
     </main>
-    <%= render 'layouts/footer' %>
+
   </body>
 </html>

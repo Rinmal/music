@@ -1,47 +1,82 @@
-<header>
-  <% if user_signed_in? %>
-    <br>
-    <li>
-      <%= link_to "ホーム", posts_path %>
-    </li>
-    <li>
-      <%= link_to "マイページ", user_path(current_user.id) %>
-    </li>
-    <li>
-      <%= link_to "投稿する", new_post_path %>
-    </li>
-    <li>
-      <%= link_to "グループ一覧", groups_path %>
-    </li>
-    <li>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    </li>
-    <li>
-      <%= link_to "退会する", user_unsubscribe_path(current_user) %>
-    </li>
-  <% elsif admin_signed_in? %>
-    <br>
-    <li>
-      <%= link_to "ユーザー一覧", admin_users_path %>
-    </li>
-    <li>
-      <%= link_to "投稿一覧", admin_posts_path %>
-    </li>
-    <li>
-      <%= link_to "グループ一覧", admin_groups_path %>
-    </li>
-    <li>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-    </li>
-  <% else %>
-  <li>
-    <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, class: 'btn btn-lg', method: :post %>
-  </li>
-  <li>
-    <%= link_to "ログイン",new_user_session_path, class: 'btn btn-lg' %>
-  </li>
-  <li>
-    <%= link_to "新規登録",new_user_registration_path, class: 'btn btn-lg' %>
-  </li>
-  <% end %>
+<header class="header col-lg-2 order-lg-1 bg-white">
+  <div class="header-item">
+    <nav class="navbar navbar-dark flex-lg-column">
+      <div class="title">
+        <a clss="navbar-braand" href="/">
+          <span class="text-dark">音の広場</span>
+        </a>
+      </div>
+      <ul class="navbar-nav flex-row flex-lg-column">
+        <% if user_signed_in? %>
+          <br>
+          <li>
+            <%= link_to posts_path, class: 'btn btn-lg' do %>
+              <i class="fa-solid fa-house-chimney"></i>
+              <span>ホーム</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to user_path(current_user.id), class: 'btn btn-lg' do %>
+              <i class="fa-solid fa-user"></i>
+              <span>マイページ</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_post_path, class: 'btn btn-lg' do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <span>投稿する</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to groups_path, class: 'btn btn-lg' do %>
+              <i class="fa-solid fa-users"></i>
+              <span>グループ</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, class: 'btn btn-lg', method: :delete do %>
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>ログアウト</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to user_unsubscribe_path(current_user), class: 'btn btn-lg' do %>
+              <i class="fa-solid fa-user-minus"></i>
+              <span>退会する</span>
+            <% end %>
+          </li>
+        <% elsif admin_signed_in? %>
+          <br>
+          <li>
+            <%= link_to "ユーザー一覧", admin_users_path, class: 'btn btn-lg' %>
+          </li>
+          <li>
+            <%= link_to "投稿一覧", admin_posts_path, class: 'btn btn-lg' %>
+          </li>
+          <li>
+            <%= link_to "グループ一覧", admin_groups_path %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, class: 'btn btn-lg', method: :delete %>
+          </li>
+        <% else %>
+        <li>
+          <%= link_to "ゲストログイン", users_guest_sign_in_path, class: 'btn btn-lg', method: :post %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path, class: 'btn btn-lg' do %>
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>ログイン</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_registration_path, class: 'btn btn-lg' do %>
+            <i class="fa-solid fa-user-plus"></i>
+            <span>新規登録</span>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
 </header>
