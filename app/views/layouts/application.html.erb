@@ -13,7 +13,7 @@
   <body class="row">
     <%= render 'layouts/header' %>
     <%= render 'layouts/search' %>
-    <main class="col-lg-7 order-lg-2">
+    <main class="main col-lg-7 order-lg-2", style="min-height: 100vh">
       <p id="notice"><%= notice %></p>
       <p id="alert", class="bg-danger text-white"><%= alert %></p>
       <%= yield %>

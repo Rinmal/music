@@ -1,6 +1,6 @@
-<div class="search_form">
+<div class="search">
   <%= form_with url: search_path, method: :get do |f| %>
     <%= f.text_field :word %>
-    <%= f.submit "検索", class: 'btn btn-sm' %>
+    <font size="5"><%= f.submit "検索", class: 'btn btn-sm btn-light btn-outline-secondary' %></font>
   <% end %>
 </div>

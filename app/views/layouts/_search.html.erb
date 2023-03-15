@@ -1,9 +1,7 @@
 <div class="search-box col-lg-3 pt-2 order-lg-3">
-  <div class="search">
-    <% if user_signed_in? %>
-      <%= render "/public/searches/search" %>
-    <% elsif admin_signed_in? %>
-      <%= render "/admin/searches/search" %>
-    <% end %>
-  </div>
+  <% if user_signed_in? %>
+    <%= render "/public/searches/search" %>
+  <% elsif admin_signed_in? %>
+    <%= render "/admin/searches/search" %>
+  <% end %>
 </div>
