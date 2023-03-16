@@ -1,9 +1,10 @@
 <%= form_with model: [post, comment], local: false do |f| %>
-  <div class="form-group">
-    <%= f.label :comment %>
-    <%= f.text_area :comment, class: 'form-control comment' %>
-  </div>
-  <div class="form-group">
-    <%= f.submit '送信', class: 'btn btn-info btn-sm' %>
+  <div class="comment-form">
+    <div class="form-area">
+      <%= f.text_area :comment, class: 'form-control' %>
+    </div>
+    <div class="form-btn mt-4">
+      <%= f.submit 'コメントする', class: 'btn btn-info btn-sm' %>
+    </div>
   </div>
 <% end %>
