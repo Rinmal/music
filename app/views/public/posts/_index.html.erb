@@ -1,18 +1,32 @@
 <% posts.each do |tweet| %>
-  <%= link_to post_path(tweet) do %>
-    <div>
-      <%= image_tag tweet.user.get_profile_image(50,50),class: 'rounded-circle' %>
-      <%= tweet.user.name %>
-      <%= tweet.body %>
-      <% if tweet.favorited_by?(current_user) %>
-        <%= link_to post_favorites_path(tweet), method: :delete, remote: false do %>
-          ♥︎<%= tweet.favorites.count %>
-        <% end %>
-      <% else %>
-        <%= link_to post_favorites_path(tweet), method: :post, remote: false do %>
-          ♡<%= tweet.favorites.count %>
-        <% end %>
+  <div class="post">
+    <div class="post-profile">
+      <%= link_to user_path(tweet.user), class: 'text-dark' do %>
+        <%= image_tag tweet.user.get_profile_image(50,50),class: 'rounded-circle' %>
+        <%= tweet.user.name %>
       <% end %>
     </div>
-  <% end %>
+    <div class="post-content">
+      <%= render_with_tags(simple_format(tweet.body)) %>
+    </div>
+    <div class="post-bottom">
+      <div class="post-show">
+        <%= link_to post_path(tweet), class: 'text-dark' do %>
+          <i class="fa-regular fa-comment"></i>
+          <span>コメントする</span>
+        <% end %>
+      </div>
+      <div class="post-favorite">
+        <% if tweet.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(tweet), class: 'text-dark', method: :delete, remote: false do %>
+            ♥︎<%= tweet.favorites.count %>
+          <% end %>
+        <% else %>
+          <%= link_to post_favorites_path(tweet), class: 'text-dark', method: :post, remote: false do %>
+            ♡<%= tweet.favorites.count %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
