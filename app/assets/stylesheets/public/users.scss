@@ -1,3 +1,42 @@
 // Place all the styles related to the public/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.wrap {
+  width: 100%;
+  // margin: 0 auto;
+}
+
+#tab-menu {
+  display: flex;
+}
+
+#tab-menu li {
+  list-style-type: none;
+  width: 33%;
+}
+
+#tab-menu li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+#tab-menu .active {
+  background: #fff;
+  color: #000;
+  border-bottom: 3px solid #FFBEDA;
+}
+
+#tab-contents {
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tab-contents .tab {
+  width: 100%;
+}
