@@ -8,6 +8,8 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts
     @groups = @user.groups
+    favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
   end
 
   def edit

@@ -1,29 +1,63 @@
 <h1>マイページ</h1>
-<div class="profile">
-  <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
-  <%= @user.name %>
-  <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
-    <%= link_to edit_user_path do %>
-      <i class="fa-solid fa-gear"></i>
-    <% end %>
-  <% end %>
-  <%= @user.introduction %>
-  <%= link_to "いいね一覧", user_favorites_path(@user) %>
+<div class="profile px-2">
+  <div class="profile-head">
+    <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
+    <%= @user.name %>
+    <div class="float-right mt-3 mr-4">
+      <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
+        <%= link_to edit_user_path do %>
+          <i class="fa-solid fa-gear text-dark"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="introduction px-3">
+    <%= @user.introduction %>
+  </div>
 </div>
-<div class="posts">
-  <% if @posts.any? %>
-    <%= render 'public/posts/index', posts: @posts %>
-  <% else %>
-    <p>まだ投稿はありません</p>
-  <% end %>
+<div class="wrap">
+  <ul id="tab-menu">
+    <li><a href="#posts" class="active">投稿</a></li>
+    <li><a href="#groups" class="">グループ</a></li>
+    <li><a href="#favorites" class="">いいね</a></li>
+  </ul>
+
+  <div id="tab-contents">
+    <div id="posts" class="tab">
+      <% if @posts.any? %>
+        <%= render 'public/posts/index', posts: @posts %>
+      <% else %>
+        <p>まだ投稿はありません</p>
+      <% end %>
+    </div>
+    <div id="groups" class="tab">
+      <% if @groups.any? %>
+        <% @groups.each do |group| %>
+          <%= image_tag group.get_group_image(50,50) %>
+          <%= group.name %>
+        <% end %>
+      <% else %>
+        <p>参加グループはありません</p>
+      <% end %>
+    </div>
+    <div id="favorites" class="tab">
+      <% if @favorite_posts.any? %>
+        <%= render 'public/posts/index', posts: @favorite_posts %>
+      <% else %>
+        <p>まだいいねしてません</p>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div class="group">
-  <% if @groups.any? %>
-    <% @groups.each do |group| %>
-      <%= image_tag group.get_group_image(50,50) %>
-      <%= group.name %>
-    <% end %>
-  <% else %>
-    <p>参加グループはありません</p>
-  <% end %>
-</div>
+
+<script>
+  $('#tab-contents .tab[id != "posts"]').hide();
+
+  $('#tab-menu a').on('click', function(event){
+    $("#tab-contents .tab").hide();
+    $("#tab-menu .active").removeClass("active");
+    $(this).addClass("active");
+    $($(this).attr("href")).show();
+    event.preventDefault();
+  });
+</script>
