@@ -1,0 +1,8 @@
+<% groups.each do |group| %>
+  <%= link_to admin_group_path(group), class: 'text-decoration-none' do %>
+    <div class=" group px-5 text-dark ">
+      <%= image_tag group.get_group_image(60,60) %>
+      <span class="pl-3"><%= group.name %></span>
+    </div>
+  <% end %>
+<% end  %>

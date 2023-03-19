@@ -1,8 +1,10 @@
-<h1>投稿</h1>
+<h2>投稿</h2>
 <div class="post">
   <div class="profile">
-    <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
-    <%= @post.user.name %>
+    <%= link_to user_path(@post.user), class: 'text-dark' do %>
+      <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+      <%= @post.user.name %>
+    <% end %>
     <% if @post.user == current_user %>
       <div class="float-right mt-3 mr-4">
         <%= link_to "削除", post_path(@post.id), class: 'btn  btn-sm btn-outline-danger', method: :delete, "data-confirm" => "本当に削除しますか？" %>
