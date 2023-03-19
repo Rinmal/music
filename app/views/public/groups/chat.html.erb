@@ -7,11 +7,12 @@
           <div class="chat-face">
             <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
           </div>
+
           <div class="chat-fukidashi">
             <strong><%= message.message %></strong><br>
             <%= message.created_at.strftime("%m-%d %H:%M") %>
             <%= link_to message_path(message), method: :delete do %>
-              <i class="fa-solid fa-xmark"></i>
+              <i class="fa-solid fa-xmark text-danger"></i>
             <% end %>
           </div>
         </div>
@@ -21,6 +22,7 @@
             <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
             <%= message.user.name %>
           </div>
+
           <div class="chat-fukidashi">
             <strong><%= message.message %></strong><br>
             <%= message.created_at.strftime("%m-%d %H:%M") %>
@@ -35,11 +37,11 @@
       <div class="float-right mr-5">
         <%= f.submit "送信", class: 'btn btn-sm btn-outline-dark' %>
       </div>
+
       <div class="message-form">
         <%= f.text_field :message, placeholder: "チャット", class: 'form-text-field' %>
       </div>
       <%= f.hidden_field :group_id, value: @group.id %>
-
     <% end %>
   </div>
 </div>

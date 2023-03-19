@@ -48,16 +48,28 @@
         <% elsif admin_signed_in? %>
           <br>
           <li>
-            <%= link_to "ユーザー一覧", admin_users_path, class: 'btn btn-lg' %>
+            <%= link_to admin_users_path, class: 'btn btn-lg' do %>
+            <i class="fa-solid fa-user"></i>
+            <span>ユーザー一覧</span>
+            <% end %>
           </li>
           <li>
-            <%= link_to "投稿一覧", admin_posts_path, class: 'btn btn-lg' %>
+            <%= link_to admin_posts_path, class: 'btn btn-lg' do %>
+              <i class="fa-regular fa-folder-closed"></i>
+              <span>投稿一覧</span>
+            <% end %>
           </li>
           <li>
-            <%= link_to "グループ一覧", admin_groups_path %>
+            <%= link_to admin_groups_path, class: 'btn btn-lg' do %>
+              <i class="fa-solid fa-users"></i>
+              <span>グループ一覧</span>
+            <% end %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, class: 'btn btn-lg', method: :delete %>
+            <%= link_to destroy_admin_session_path, class: 'btn btn-lg', method: :delete do %>
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>ログアウト</span>
+            <% end %>
           </li>
         <% else %>
         <li>
