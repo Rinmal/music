@@ -5,7 +5,7 @@
       <%= render 'layouts/errors', obj: @user %>
       <form class="form-horizontal">
         <div class="form-group row mx-auto">
-          <label class="col-lg-4 mt-1", for="inputImage">プロフィール画像</label>
+          <label class="col-lg-4 mt-1", for="profile_image">プロフィール画像</label>
           <div class="col-lg-8">
             <%= f.file_field :profile_image, class: 'form-control-file', accept: 'image/*' %>
           </div>

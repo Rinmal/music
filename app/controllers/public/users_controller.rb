@@ -6,10 +6,10 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
-    @groups = @user.groups
+    @posts = @user.posts.order('created_at DESC')
+    @groups = @user.groups.order('created_at DESC')
     favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
+    @favorite_posts = Post.find(favorites).sort_by{ |p| p.created_at }.reverse
   end
 
   def edit

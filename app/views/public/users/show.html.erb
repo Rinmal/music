@@ -1,8 +1,8 @@
-<h1>マイページ</h1>
+<h2>マイページ</h2>
 <div class="profile px-2">
   <div class="profile-head">
     <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
-    <%= @user.name %>
+    <span class="pl-4"><%= @user.name %></span>
     <div class="float-right mt-3 mr-4">
       <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
         <%= link_to edit_user_path do %>
@@ -11,10 +11,12 @@
       <% end %>
     </div>
   </div>
+
   <div class="introduction px-3">
     <%= @user.introduction %>
   </div>
 </div>
+
 <div class="wrap">
   <ul id="tab-menu">
     <li><a href="#posts" class="active">投稿</a></li>
@@ -32,10 +34,7 @@
     </div>
     <div id="groups" class="tab">
       <% if @groups.any? %>
-        <% @groups.each do |group| %>
-          <%= image_tag group.get_group_image(50,50) %>
-          <%= group.name %>
-        <% end %>
+        <%= render 'public/groups/index', groups: @groups %>
       <% else %>
         <p>参加グループはありません</p>
       <% end %>

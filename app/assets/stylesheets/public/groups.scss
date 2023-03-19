@@ -1,3 +1,85 @@
 // Place all the styles related to the public/groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.wrap {
+  width: 100%;
+  // margin: 0 auto;
+}
+
+#group-tab-menu {
+  display: flex;
+}
+
+#group-tab-menu li {
+  list-style-type: none;
+  width: 50%;
+}
+
+#group-tab-menu li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+#group-tab-menu .active {
+  background: #fff;
+  color: #000;
+  border-bottom: 3px solid #FFBEDA;
+}
+
+#group-tab-contents {
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#group-tab-contents .tab {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.group {
+  margin: 10px auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.group :last-child {
+  border: none;
+}
+
+.group-profile {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #FFBEDA;
+}
+
+.user {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px 0 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-index {
+  min-height: 70vh;
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+
+.send-message {
+  // margin: 0 auto;
+}
+
+.message-form {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.form-text-field {
+  width: 100%;
+}
