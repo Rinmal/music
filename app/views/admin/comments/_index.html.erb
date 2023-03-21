@@ -4,16 +4,14 @@
     <% comments.each do |comment| %>
       <div class="comment">
         <div class="profile">
-          <%= link_to user_path(comment.user), class: 'text-dark' do %>
+          <%= link_to admin_user_path(comment.user), class: 'text-dark' do %>
             <%= image_tag comment.user.get_profile_image(50,50), class: 'rounded-circle' %>
             <%= comment.user.name %>
           <% end %>
-          <% if comment.user == current_user %>
-            <div class="float-right mt-3 mr-4">
-              <%= link_to "削除", post_comment_path(comment.post, comment), class: 'btn btn-sm btn-outline-danger', method: :delete,
-                "data-confirm" => "本当に削除しますか？", remote: false %>
-            </div>
-          <% end %>
+          <div class="float-right mt-3 mr-4">
+            <%= link_to "削除", admin_post_comment_path(comment.post, comment), class: 'btn btn-sm btn-outline-danger', method: :delete,
+              "data-confirm" => "本当に削除しますか？", remote: false %>
+          </div>
         </div>
         <div class="comment-content">
           <%= simple_format(comment.comment) %>

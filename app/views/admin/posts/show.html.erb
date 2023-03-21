@@ -1,2 +1,18 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<h2>投稿</h2>
+
+<div class="post">
+  <div class="profile">
+    <%= link_to admin_user_path(@post.user), class: 'text-dark' do %>
+      <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+      <%= @post.user.name %>
+    <% end %>
+  </div>
+
+  <div class="post-content">
+    <%= render_with_admin_tags(simple_format(@post.body)) %>
+  </div>
+</div>
+
+<div class="comments">
+  <%= render 'admin/comments/index', comments: @comments %>
+</div>

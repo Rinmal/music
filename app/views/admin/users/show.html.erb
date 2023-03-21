@@ -1,2 +1,72 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h2></h2>
+
+<div class="profile px-2">
+  <div class="profile-head">
+    <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
+    <span class="pl-4"><%= @user.name %></span>
+    <div class="float-right mt-3 mr-4">
+      <% if admin_signed_in? %>
+        <%= form_with model: @user, url: admin_user_path(@user) do |f| %>
+          <div>
+            <%= f.radio_button :is_frozen, false %>
+            <%= f.label :is_frozen, "有効" %>
+
+            <%= f.radio_button :is_frozen, true %>
+            <%= f.label :is_frozen, "凍結" %>
+
+            <%= f.submit "更新", class: 'btn btn-sm btn-outline-success' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="introduction px-3">
+    <%= @user.introduction %>
+  </div>
+</div>
+
+<div class="wrap">
+  <ul id="tab-menu">
+    <li><a href="#posts" class="active">投稿</a></li>
+    <li><a href="#groups" class="">グループ</a></li>
+    <li><a href="#favorites" class="">いいね</a></li>
+  </ul>
+
+  <div id="tab-contents">
+    <div id="posts" class="tab">
+      <% if @posts.any? %>
+        <%= render 'admin/posts/index', posts: @posts %>
+      <% else %>
+        <p>まだ投稿はありません</p>
+      <% end %>
+    </div>
+    <div id="groups" class="tab">
+      <% if @groups.any? %>
+        <%= render 'admin/groups/index', groups: @groups %>
+      <% else %>
+        <p>参加グループはありません</p>
+      <% end %>
+    </div>
+    <div id="favorites" class="tab">
+      <% if @favorite_posts.any? %>
+        <%= render 'admin/posts/index', posts: @favorite_posts %>
+      <% else %>
+        <p>まだいいねしてません</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#tab-contents .tab[id != "posts"]').hide();
+
+  $('#tab-menu a').on('click', function(event){
+    $("#tab-contents .tab").hide();
+    $("#tab-menu .active").removeClass("active");
+    $(this).addClass("active");
+    $($(this).attr("href")).show();
+    event.preventDefault();
+  });
+</script>
+

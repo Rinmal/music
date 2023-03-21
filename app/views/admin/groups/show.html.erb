@@ -1,2 +1,31 @@
-<h1>Admin::Groups#show</h1>
-<p>Find me in app/views/admin/groups/show.html.erb</p>
+<h2 class="pb-3"><%= @group.name %></h1>
+
+<div class="group-profile">
+  <div class="group-profile-head row pb-2">
+    <div class="col-3 col-sm-2 ml-2"><%= image_tag @group.get_group_image(80,80) %></div>
+    <div class="col-5 d-flex align-items-center"><%= @group.name %></div>
+    <div class="col-3 ml-md-auto d-flex align-items-center">
+      <%= link_to chat_admin_group_path(@group) do %>
+        <div class="col-5">
+          <i class="fa-regular fa-comments h4 text-dark"></i>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="group-introduction px-3">
+    <%= @group.introduction %>
+  </div>
+</div>
+
+<h3 class="mt-3">参加者</h3>
+<div class="users">
+  <% @users.each do |user| %>
+    <%= link_to admin_user_path(user) do %>
+      <div class="user px-5 text-dark">
+        <%= image_tag user.get_profile_image(50,50) %>
+        <%= user.name %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,8 +1,6 @@
-<% if user_signed_in? %>
-  <div class="search_form">
-    <%= form_with url: search_path, method: :get do |f| %>
-      <%= f.text_field :word %>
-      <%= f.submit "検索", class: 'btn btn-sm' %>
-    <% end %>
-  </div>
-<% end %>
+<div class="search">
+  <%= form_with url: search_path, method: :get do |f| %>
+    <%= f.text_field :word %>
+    <font size="5"><%= f.submit "検索", class: 'btn btn-sm btn-light btn-outline-secondary' %></font>
+  <% end %>
+</div>

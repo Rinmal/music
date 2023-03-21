@@ -1,14 +1,20 @@
-<h1>投稿</h1>
+<h2>投稿</h2>
 <div class="post">
   <div class="profile">
-    <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
-    <%= @post.user.name %>
+    <%= link_to user_path(@post.user), class: 'text-dark' do %>
+      <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+      <%= @post.user.name %>
+    <% end %>
     <% if @post.user == current_user %>
-      <%= link_to "削除", post_path(@post.id), class: 'btn btn-danger btn-sm', method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <div class="float-right mt-3 mr-4">
+        <%= link_to "削除", post_path(@post.id), class: 'btn  btn-sm btn-outline-danger', method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </div>
     <% end %>
   </div>
-  <div class="post-body">
-    <%= render_with_tags(@post.body) %>
+  <div class="post-content">
+    <%= render_with_tags(simple_format(@post.body)) %>
+  </div>
+  <div class="post-favorite float-right mr-5 pr-5">
     <% if @post.favorited_by?(current_user) %>
       <%= link_to post_favorites_path(@post), method: :delete, remote: false do %>
         ♥︎<%= @post.favorites.count %>
@@ -19,7 +25,8 @@
       <% end %>
     <% end %>
   </div>
-  <div class="send-comment">
+
+  <div class="send-comment mt-5">
     <%= render 'public/comments/form', post: @post, comment: @comment %>
   </div>
 </div>

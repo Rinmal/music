@@ -1,5 +1,7 @@
 class Public::GroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_user_frozen
 
   def index
     @groups = Group.all
@@ -71,6 +73,13 @@ class Public::GroupsController < ApplicationController
     group = Group.find(params[:id])
     unless current_user.id == group.owner_id
       redirect_to group_path(group)
+    end
+  end
+
+  def is_user_frozen
+    @user = current_user
+    if @user.is_frozen == true
+      redirect_to posts_path, alert: 'このアカウントは停止されました'
     end
   end
 end

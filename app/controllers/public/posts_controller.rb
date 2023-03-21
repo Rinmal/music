@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :is_user_frozen, except: [:index]
 
   def index
     @posts = Post.all.order('created_at DESC')
@@ -7,7 +9,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @post.comments
   end
 
   def new
@@ -31,17 +33,22 @@ class Public::PostsController < ApplicationController
   end
 
   def tag
-    @user = current_user
     @tag = Tag.find_by(body: params[:body])
     @posts = @tag.posts
     # @post = @tag.posts.page(params[:page])
-
   end
 
   private
 
   def post_params
      params.require(:post).permit(:body)
+  end
+
+  def is_user_frozen
+    @user = current_user
+    if @user.is_frozen == true
+      redirect_to posts_path, alert: 'このアカウントは停止されました'
+    end
   end
 
 end

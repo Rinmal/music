@@ -1,0 +1,21 @@
+<% posts.each do |tweet| %>
+  <div class="post">
+    <div class="post-profile">
+      <%= link_to admin_user_path(tweet.user), class: 'text-dark' do %>
+        <%= image_tag tweet.user.get_profile_image(50,50),class: 'rounded-circle' %>
+        <%= tweet.user.name %>
+      <% end %>
+    </div>
+    <div class="post-content">
+      <%= render_with_tags(simple_format(tweet.body)) %>
+    </div>
+    <div class="post-bottom">
+      <div class="post-show">
+        <%= link_to admin_post_path(tweet), class: 'text-dark' do %>
+          <i class="fa-regular fa-comment"></i>
+          <span>コメントを見る</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
