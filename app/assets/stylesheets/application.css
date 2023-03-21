@@ -24,6 +24,10 @@
   position: fixed;
 }
 
+.logo {
+  width: 40px;
+}
+
 .search {
   position: fixed;
 }
