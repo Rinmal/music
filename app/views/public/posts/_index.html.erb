@@ -16,16 +16,8 @@
           <span>コメントする</span>
         <% end %>
       </div>
-      <div class="post-favorite">
-        <% if tweet.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(tweet), class: 'text-dark', method: :delete, remote: false do %>
-            ♥︎<%= tweet.favorites.count %>
-          <% end %>
-        <% else %>
-          <%= link_to post_favorites_path(tweet), class: 'text-dark', method: :post, remote: false do %>
-            ♡<%= tweet.favorites.count %>
-          <% end %>
-        <% end %>
+      <div id="favorite_button_<%= tweet.id %>">
+        <%= render 'public/favorites/favorite', post: tweet %>
       </div>
     </div>
   </div>
