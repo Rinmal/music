@@ -27,7 +27,7 @@ class Post < ApplicationRecord
   end
 
   def favorited_by?(user)
-    self.favorites.exists?(user_id: user.id)
+    favorites.exists?(user_id: user.id)
   end
 
 end
