@@ -54,9 +54,9 @@ class Public::GroupsController < ApplicationController
   end
 
   def chat
-    @group = Group.find_by(id: params[:id])
+    @group = Group.find(params[:id])
     if @group.present?
-      @messages = @group.messages
+      @messages = @group.messages.order('created_at DESC')
       @message = Message.new
     else
       redirect_to posts_path

@@ -64,15 +64,18 @@
   border-bottom: 1px solid #ddd;
 }
 
-.chat-index {
-  min-height: 70vh;
+.chat {
+  height: 70vh;
+}
+
+#message-index {
+  height: 70vh;
   padding: 5px;
   border: 1px solid #000;
   border-radius: 20px;
-}
-
-.send-message {
-  // margin: 0 auto;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .message-form {

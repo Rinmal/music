@@ -1,47 +1,10 @@
 <h2><%= @group.name %></h2>
 <div class="chat mt-5 mx-3">
-  <div class="chat-index">
-    <% @messages.each do |message| %>
-      <% if message.user == current_user %>
-        <div class="d-flex flex-row-reverse bd-highlight">
-          <div class="chat-face">
-            <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
-          </div>
-
-          <div class="chat-fukidashi">
-            <strong><%= message.message %></strong><br>
-            <%= message.created_at.strftime("%m-%d %H:%M") %>
-            <%= link_to message_path(message), method: :delete do %>
-              <i class="fa-solid fa-xmark text-danger"></i>
-            <% end %>
-          </div>
-        </div>
-      <% else %>
-        <div class="other-messages">
-          <div class="chat-face">
-            <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
-            <%= message.user.name %>
-          </div>
-
-          <div class="chat-fukidashi">
-            <strong><%= message.message %></strong><br>
-            <%= message.created_at.strftime("%m-%d %H:%M") %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+  <div id="message-index">
+    <%= render 'public/messages/messages', messages: @messages %>
   </div>
 
-  <div class="send-message pt-3">
-    <%= form_with model: @message do |f| %>
-      <div class="float-right mr-5">
-        <%= f.submit "送信", class: 'btn btn-sm btn-outline-dark' %>
-      </div>
-
-      <div class="message-form">
-        <%= f.text_field :message, placeholder: "チャット", class: 'form-text-field' %>
-      </div>
-      <%= f.hidden_field :group_id, value: @group.id %>
-    <% end %>
+  <div id="send-message" class=" pt-3">
+    <%= render 'public/messages/new', message: @message %>
   </div>
 </div>
