@@ -1,0 +1,5 @@
+
+$(".comments").html("<%= j(render 'public/comments/index', comments: @comments) %>");
+$(".send-comment").html("<%= j(render 'public/comments/form', post: @post, comment: @comment) %>");
+$("textarea").val('');
+<!--$("submit").val('');-->

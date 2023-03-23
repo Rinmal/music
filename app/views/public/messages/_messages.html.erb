@@ -1,0 +1,29 @@
+<% messages.each do |message| %>
+  <% if message.user == current_user %>
+    <div class="d-flex flex-row-reverse bd-highlight">
+      <div class="chat-face">
+        <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
+      </div>
+
+      <div class="chat-fukidashi">
+        <strong><%= message.message %></strong><br>
+        <%= message.created_at.strftime("%m-%d %H:%M") %>
+        <%= link_to message_path(message), method: :delete do %>
+          <i class="fa-solid fa-xmark text-danger"></i>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="other-messages">
+      <div class="chat-face">
+        <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
+        <%= message.user.name %>
+      </div>
+
+      <div class="chat-fukidashi">
+        <strong><%= message.message %></strong><br>
+        <%= message.created_at.strftime("%m-%d %H:%M") %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

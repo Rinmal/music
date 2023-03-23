@@ -1,0 +1,10 @@
+<%= form_with model: message do |f| %>
+  <div class="float-right mr-5">
+    <%= f.submit "送信", class: 'btn btn-sm btn-outline-dark' %>
+  </div>
+
+  <div class="message-form">
+    <%= f.text_field :message, placeholder: "チャット", class: 'form-text-field' %>
+  </div>
+  <%= f.hidden_field :group_id, value: params[:id] %>
+<% end %>
