@@ -11,13 +11,22 @@
     </div>
     <div class="post-bottom">
       <div class="post-show">
-        <%= link_to post_path(tweet), class: 'text-dark' do %>
-          <i class="fa-regular fa-comment"></i>
-          <span>コメントする</span>
+        <% if current_user.name == 'ゲストユーザー'%>
+          <%= link_to post_path(tweet), class: 'text-dark' do %>
+            <i class="fa-regular fa-comment"></i>
+            <span>コメントを見る</span>
+          <% end %>
+        <% else %>
+          <%= link_to post_path(tweet), class: 'text-dark' do %>
+            <i class="fa-regular fa-comment"></i>
+            <span>コメントする</span>
+          <% end %>
         <% end %>
       </div>
       <div id="favorite_button_<%= tweet.id %>">
-        <%= render 'public/favorites/favorite', post: tweet %>
+        <% unless current_user.name == 'ゲストユーザー' %>
+          <%= render 'public/favorites/favorite', post: tweet %>
+        <% end %>
       </div>
     </div>
   </div>

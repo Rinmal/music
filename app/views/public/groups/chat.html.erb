@@ -5,6 +5,8 @@
   </div>
 
   <div id="send-message" class=" pt-3">
-    <%= render 'public/messages/new', message: @message %>
+    <% unless current_user.name == 'ゲストユーザー' %>
+      <%= render 'public/messages/new', message: @message %>
+    <% end %>
   </div>
 </div>

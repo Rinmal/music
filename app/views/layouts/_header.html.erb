@@ -22,12 +22,14 @@
               <span>マイページ</span>
             <% end %>
           </li>
-          <li>
-            <%= link_to new_post_path, class: 'btn btn-lg' do %>
-              <i class="fa-solid fa-pen-to-square"></i>
-              <span>投稿する</span>
-            <% end %>
-          </li>
+          <% unless current_user.name == 'ゲストユーザー' %>
+            <li>
+              <%= link_to new_post_path, class: 'btn btn-lg' do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>投稿する</span>
+              <% end %>
+            </li>
+          <% end %>
           <li>
             <%= link_to groups_path, class: 'btn btn-lg' do %>
               <i class="fa-solid fa-users"></i>
