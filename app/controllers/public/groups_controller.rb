@@ -1,6 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:new, :create, :join]
   before_action :is_user_frozen
 
   def index
@@ -54,9 +55,9 @@ class Public::GroupsController < ApplicationController
   end
 
   def chat
-    @group = Group.find_by(id: params[:id])
+    @group = Group.find(params[:id])
     if @group.present?
-      @messages = @group.messages
+      @messages = @group.messages.order('created_at DESC')
       @message = Message.new
     else
       redirect_to posts_path
@@ -73,6 +74,13 @@ class Public::GroupsController < ApplicationController
     group = Group.find(params[:id])
     unless current_user.id == group.owner_id
       redirect_to group_path(group)
+    end
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "ゲストユーザー"
+      redirect_to user_path(current_user), notice: 'ゲストユーザーは閲覧用のみ利用可能です'
     end
   end
 

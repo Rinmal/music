@@ -2,14 +2,18 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
-  before_action :is_user_frozen
+  before_action :is_user_frozen, except: [:show]
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.order('created_at DESC')
-    @groups = @user.groups.order('created_at DESC')
-    favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
-    @favorite_posts = Post.find(favorites).sort_by{ |p| p.created_at }.reverse
+    if (current_user.is_frozen == true) && (@user.id != current_user.id)
+      redirect_to posts_path, alert: 'このアカウントは停止されました'
+    else
+      @posts = @user.posts.order('created_at DESC')
+      @groups = @user.groups.order('created_at DESC')
+      favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
+      @favorite_posts = Post.find(favorites).sort_by{ |p| p.created_at }.reverse
+    end
   end
 
   def edit
