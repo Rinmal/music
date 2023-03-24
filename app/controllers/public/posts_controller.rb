@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_user_frozen, except: [:index]
+  before_action :ensure_guest_user, except: [:index, :show, :tag]
+  before_action :is_user_frozen, except: [:index, :tag]
 
   def index
     @posts = Post.all.order('created_at DESC')
@@ -42,6 +43,13 @@ class Public::PostsController < ApplicationController
 
   def post_params
      params.require(:post).permit(:body)
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "ゲストユーザー"
+      redirect_to user_path(current_user), notice: 'ゲストユーザは閲覧用のみ利用可能です'
+    end
   end
 
   def is_user_frozen

@@ -1,4 +1,5 @@
 class Public::MessagesController < ApplicationController
+  before_action :ensure_guest_user
 
   def create
     @message = Message.new(message_params)
@@ -15,5 +16,12 @@ class Public::MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:user_id, :group_id, :message).merge(user_id: current_user.id)
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "ゲストユーザー"
+      redirect_to user_path(current_user), notice: 'ゲストユーザーは閲覧用のみ利用可能です'
+    end
   end
 end
