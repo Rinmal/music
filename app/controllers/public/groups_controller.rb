@@ -1,12 +1,13 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :group_exist?, only: [:show, :chat]
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:new, :create, :join]
   before_action :is_user_frozen
 
   def index
-    @groups = Group.all
-    @joinedgroups = current_user.groups
+    @groups = Group.all.order('created_at DESC')
+    @joinedgroups = current_user.order('created_at DESC')
   end
 
   def show
@@ -42,6 +43,7 @@ class Public::GroupsController < ApplicationController
     end
   end
 
+# グループ退室
   def destroy
     @group = Group.find(params[:id])
     @group.users.delete(current_user)
@@ -56,18 +58,19 @@ class Public::GroupsController < ApplicationController
 
   def chat
     @group = Group.find(params[:id])
-    if @group.present?
-      @messages = @group.messages.order('created_at DESC')
-      @message = Message.new
-    else
-      redirect_to posts_path
-    end
   end
 
   private
 
   def group_params
     params.require(:group).permit(:name, :introduction, :group_image)
+  end
+
+# 存在しないグループに飛べないようにする
+  def group_exist?
+    unless Group.find_by(id: params[:id])
+      redirect_to groups_path
+    end
   end
 
   def is_matching_login_user
@@ -77,13 +80,14 @@ class Public::GroupsController < ApplicationController
     end
   end
 
+# ゲストログイン時の利用制限
   def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.name == "ゲストユーザー"
+    if current_user.name == "ゲストユーザー"
       redirect_to user_path(current_user), notice: 'ゲストユーザーは閲覧用のみ利用可能です'
     end
   end
 
+# 凍結時の利用制限
   def is_user_frozen
     @user = current_user
     if @user.is_frozen == true

@@ -10,10 +10,10 @@ class Admin::PostsController < ApplicationController
     @comments = @post.comments
   end
 
+# タグを押下するとタグに基づく投稿の一覧を見れる
   def tag
     @tag = Tag.find_by(body: params[:body])
-    @posts = @tag.posts
-    # @post = @tag.posts.page(params[:page])
+    @posts = @tag.posts.page(params[:page])
   end
 
 end

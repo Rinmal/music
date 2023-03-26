@@ -1,6 +1,7 @@
 <div class="comment-index">
   <% if comments.any? %>
     <h4 class="mt-1 ml-1">コメント</h4>
+
     <% comments.each do |comment| %>
       <div class="comment">
         <div class="profile">
@@ -8,6 +9,7 @@
             <%= image_tag comment.user.get_profile_image(50,50), class: 'rounded-circle' %>
             <%= comment.user.name %>
           <% end %>
+
           <% if comment.user == current_user %>
             <div class="float-right mt-3 mr-4">
               <%= link_to "削除", post_comment_path(comment.post, comment), class: 'btn btn-sm btn-outline-danger', method: :delete,
@@ -15,11 +17,13 @@
             </div>
           <% end %>
         </div>
+
         <div class="comment-content">
           <%= simple_format(comment.comment) %>
         </div>
       </div>
     <% end %>
+
   <% else %>
     <p>コメントはありません</p>
   <% end %>

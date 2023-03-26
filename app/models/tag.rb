@@ -5,6 +5,7 @@ class Tag < ApplicationRecord
 
   validates :body, presence: true, length: {maximum: 50 }
 
+# 先頭の＃を外して検索する
   def self.search(word)
     if word != '#'
       search = word.delete('#')

@@ -6,9 +6,12 @@
         <%= tweet.user.name %>
       <% end %>
     </div>
+
     <div class="post-content">
+      <!--PostsHelperを使用-->
       <%= render_with_admin_tags(simple_format(tweet.body)) %>
     </div>
+
     <div class="post-bottom">
       <div class="post-show">
         <%= link_to admin_post_path(tweet), class: 'text-dark' do %>

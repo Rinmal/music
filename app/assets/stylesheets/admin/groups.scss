@@ -1,3 +1,17 @@
 // Place all the styles related to the admin/groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.chat {
+  height: 70vh;
+}
+
+.message-index {
+  height: 70vh;
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}

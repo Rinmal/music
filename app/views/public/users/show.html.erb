@@ -33,6 +33,7 @@
         <p>まだ投稿はありません</p>
       <% end %>
     </div>
+
     <div id="groups" class="tab">
       <% if @groups.any? %>
         <%= render 'public/groups/index', groups: @groups %>
@@ -40,6 +41,7 @@
         <p>参加グループはありません</p>
       <% end %>
     </div>
+
     <div id="favorites" class="tab">
       <% if @favorite_posts.any? %>
         <%= render 'public/posts/index', posts: @favorite_posts %>
