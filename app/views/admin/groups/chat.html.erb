@@ -1,9 +1,9 @@
 <h2><%= @group.name %></h2>
 
 <div class="chat mt-5 mx-3">
-  <div class="chat-index">
+  <div class="message-index">
     <% @messages.each do |message| %>
-      <div class="other-messages">
+      <div class="other-messages py-2">
         <div class="chat-face">
           <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
           <%= message.user.name %>

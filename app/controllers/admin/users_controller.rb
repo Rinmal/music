@@ -7,12 +7,13 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
-    @groups = @user.groups
+    @posts = @user.posts.page(params[:page]).order('created_at DESC')
+    @groups = @user.groups.order('created_at DESC')
     favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
     @favorite_posts = Post.find(favorites).sort_by{ |p| p.created_at }.reverse
   end
 
+# ユーザーの凍結のみ更新可能
   def update
     @user = User.find(params[:id])
     @user.update(update_params)

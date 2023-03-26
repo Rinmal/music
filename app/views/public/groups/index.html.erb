@@ -1,5 +1,6 @@
 <div class="page-head">
   <h2 class="d-inline-block">グループ一覧</h2>
+
   <div class="float-right mr-4">
     <% unless current_user.name == 'ゲストユーザー' %>
       <%= link_to new_group_path do %>
@@ -37,4 +38,3 @@
     event.preventDefault();
   });
 </script>
-

@@ -2,6 +2,7 @@
   <%= link_to post_favorites_path(post), class: 'text-dark', method: :delete, remote: true do %>
     ♥︎<%= post.favorites.count %>
   <% end %>
+
 <% else %>
   <%= link_to post_favorites_path(post), class: 'text-dark', method: :post, remote: true do %>
     ♡<%= post.favorites.count %>

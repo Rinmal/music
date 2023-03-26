@@ -1,6 +1,6 @@
 <% messages.each do |message| %>
   <% if message.user == current_user %>
-    <div class="d-flex flex-row-reverse bd-highlight">
+    <div class="d-flex flex-row-reverse bd-highlight py-2">
       <div class="chat-face">
         <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
       </div>
@@ -14,7 +14,7 @@
       </div>
     </div>
   <% else %>
-    <div class="other-messages">
+    <div class="other-messages py-2">
       <div class="chat-face">
         <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
         <%= message.user.name %>
