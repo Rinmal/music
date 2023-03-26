@@ -7,7 +7,7 @@ class Public::GroupsController < ApplicationController
 
   def index
     @groups = Group.all.order('created_at DESC')
-    @joinedgroups = current_user.order('created_at DESC')
+    @joinedgroups = current_user.groups.order('created_at DESC')
   end
 
   def show
@@ -58,6 +58,8 @@ class Public::GroupsController < ApplicationController
 
   def chat
     @group = Group.find(params[:id])
+    @messages = @group.messages.order('created_at DESC')
+    @message = Message.new
   end
 
   private

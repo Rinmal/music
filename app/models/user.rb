@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :groups, through: :entries
   has_many :messages, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
 
   validates :name, length: {minimum: 2, maximum: 20 },uniqueness: true
   validates :introduction, length: {maximum: 50 }

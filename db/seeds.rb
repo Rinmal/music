@@ -9,3 +9,15 @@ Admin.create!(
   email: ENV['ADMIN_EMAIL'],
   password: ENV['ADMIN_PASSWORD']
 )
+
+users = User.create!(
+  [
+    {email: 'takeru@test.com', name: 'たける', password: 'takerutakeru', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-mic.jpg"), filename:"sample-mic.jpg")},
+    {email: 'chiyu@test.com', name: 'ちゆ', password: 'chiyuchiyu', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-base.jpg"), filename:"sample-base.jpg")},
+    {email: 'shinpei@test.com', name: 'しんぺい', password: 'shinpeishsinpei', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-drum.jpg"), filename:"sample-drum.jpg")},
+    {email: 'yuji@test.com', name: 'ユージ', password: 'yujiyuji', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-guitar.jpg"), filename:"sample-guitar.jpg")},
+    {email: 'masato@test.com', name: 'まさと', password: 'masatomasato', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-guitar2.jpg"), filename:"sample-guitar2.jpg")},
+    {email: 'mal@test.com', name: 'mal', password: 'malmal'},
+    {email: 'hiro@test.com', name: 'hiro', password: 'hirohiro'}
+  ]
+)

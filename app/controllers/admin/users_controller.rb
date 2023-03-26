@@ -9,8 +9,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).order('created_at DESC')
     @groups = @user.groups.order('created_at DESC')
-    favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
-    @favorite_posts = Post.find(favorites).sort_by{ |p| p.created_at }.reverse
+    @favorite_posts = @user.favorite_posts.page(params[:page]).order('created_at DESC')
   end
 
 # ユーザーの凍結のみ更新可能

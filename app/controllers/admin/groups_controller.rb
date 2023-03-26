@@ -2,7 +2,7 @@ class Admin::GroupsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @groups = Group.all
+    @groups = Group.all.order('created_at DESC')
   end
 
   def show
