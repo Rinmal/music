@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :user_exist?, only: [:show, :is_deleted]
   before_action :ensure_guest_user, only: [:edit]
   before_action :is_user_frozen, except: [:show]
 
@@ -9,7 +10,7 @@ class Public::UsersController < ApplicationController
     if (current_user.is_frozen == true) && (@user.id != current_user.id)
       redirect_to posts_path, alert: 'このアカウントは停止されました'
     else
-      @posts = @user.posts.order('created_at DESC')
+      @posts = @user.posts.page(params[:page]).order('created_at DESC')
       @groups = @user.groups.order('created_at DESC')
       favorites = Favorite.where(user_id: params[:id]).pluck(:post_id)
       @favorite_posts = Post.find(favorites).sort_by{ |p| p.created_at }.reverse
@@ -29,6 +30,7 @@ class Public::UsersController < ApplicationController
     end
   end
 
+# 論理削除による退会機能
   def is_deleted
     @user = current_user
     if @user.update(is_deleted: true)
@@ -52,6 +54,14 @@ class Public::UsersController < ApplicationController
     end
   end
 
+# 存在しないユーザーに飛べないようにする
+  def user_exist?
+    unless User.find_by(id: params[:id])
+      redirect_to posts_path
+    end
+  end
+
+# ゲストログイン時の利用制限
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.name == "ゲストユーザー"
@@ -59,6 +69,7 @@ class Public::UsersController < ApplicationController
     end
   end
 
+# 凍結時の利用制限
   def is_user_frozen
     @user = current_user
     if @user.is_frozen == true

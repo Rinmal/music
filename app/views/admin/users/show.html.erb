@@ -5,6 +5,7 @@
     <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
     <span class="pl-4"><%= @user.name %></span>
     <div class="float-right mt-3 mr-4">
+      <!--凍結処理-->
       <% if admin_signed_in? %>
         <%= form_with model: @user, url: admin_user_path(@user) do |f| %>
           <div>
@@ -41,6 +42,7 @@
         <p>まだ投稿はありません</p>
       <% end %>
     </div>
+
     <div id="groups" class="tab">
       <% if @groups.any? %>
         <%= render 'admin/groups/index', groups: @groups %>
@@ -48,6 +50,7 @@
         <p>参加グループはありません</p>
       <% end %>
     </div>
+
     <div id="favorites" class="tab">
       <% if @favorite_posts.any? %>
         <%= render 'admin/posts/index', posts: @favorite_posts %>
@@ -69,4 +72,3 @@
     event.preventDefault();
   });
 </script>
-

@@ -12,11 +12,7 @@ class Admin::GroupsController < ApplicationController
 
   def chat
     @group = Group.find_by(id: params[:id])
-    if @group.present?
-      @messages = @group.messages
-    else
-      redirect_to posts_path
-    end
+    @messages = @group.messages
   end
 
 end

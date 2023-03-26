@@ -18,9 +18,9 @@ class Public::MessagesController < ApplicationController
     params.require(:message).permit(:user_id, :group_id, :message).merge(user_id: current_user.id)
   end
 
+# ゲストログイン時の利用制限
   def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.name == "ゲストユーザー"
+    if current_user.name == "ゲストユーザー"
       redirect_to user_path(current_user), notice: 'ゲストユーザーは閲覧用のみ利用可能です'
     end
   end

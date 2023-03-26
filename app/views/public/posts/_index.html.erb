@@ -6,9 +6,11 @@
         <%= tweet.user.name %>
       <% end %>
     </div>
+
     <div class="post-content">
       <%= render_with_tags(simple_format(tweet.body)) %>
     </div>
+
     <div class="post-bottom">
       <div class="post-show">
         <% if current_user.name == 'ゲストユーザー'%>
@@ -23,6 +25,7 @@
           <% end %>
         <% end %>
       </div>
+
       <div id="favorite_button_<%= tweet.id %>">
         <% unless current_user.name == 'ゲストユーザー' %>
           <%= render 'public/favorites/favorite', post: tweet %>
