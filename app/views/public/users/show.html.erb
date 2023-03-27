@@ -2,7 +2,7 @@
 
 <div class="profile px-2">
   <div class="profile-head">
-    <%= image_tag @user.get_profile_image(80, 80), class: 'rounded-circle' %>
+    <%= image_tag @user.get_profile_image, class: 'rounded-circle', size: '80x80' %>
     <span class="pl-4"><%= @user.name %></span>
     <div class="float-right mt-3 mr-4">
       <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="introduction px-3">
+  <div class="introduction pt-3 px-3">
     <%= @user.introduction %>
   </div>
 </div>

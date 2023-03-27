@@ -2,7 +2,7 @@
   <% if message.user == current_user %>
     <div class="d-flex flex-row-reverse bd-highlight py-2">
       <div class="chat-face">
-        <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
+        <%= image_tag message.user.get_profile_image, class: 'rounded-circle', size: '40x40' %>
       </div>
 
       <div class="chat-fukidashi">
@@ -16,7 +16,7 @@
   <% else %>
     <div class="other-messages py-2">
       <div class="chat-face">
-        <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
+        <%= image_tag message.user.get_profile_image, class: 'rounded-circle',size: '40x40' %>
         <%= message.user.name %>
       </div>
 

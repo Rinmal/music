@@ -5,7 +5,7 @@
     <% @messages.each do |message| %>
       <div class="other-messages py-2">
         <div class="chat-face">
-          <%= image_tag message.user.get_profile_image(40,40), class: 'rounded-circle' %>
+          <%= image_tag message.user.get_profile_image, class: 'rounded-circle', size: '40x40' %>
           <%= message.user.name %>
         </div>
 

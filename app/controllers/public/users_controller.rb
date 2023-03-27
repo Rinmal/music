@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
   end
 
 # 論理削除による退会機能
-  def is_deleted
+  def unsubscribe
     @user = current_user
     if @user.update(is_deleted: true)
       reset_session

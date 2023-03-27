@@ -36,8 +36,7 @@ class Public::PostsController < ApplicationController
 
   def tag
     @tag = Tag.find_by(body: params[:body])
-    @posts = @tag.posts
-    # @post = @tag.posts.page(params[:page])
+    @posts = @tag.posts.page(params[:page])
   end
 
   private

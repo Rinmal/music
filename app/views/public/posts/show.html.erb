@@ -5,9 +5,9 @@
 </div>
 
 <div class="post">
-  <div class="profile">
+  <div class="profile pt-1 pl-1">
     <%= link_to user_path(@post.user), class: 'text-dark' do %>
-      <%= image_tag @post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+      <%= image_tag @post.user.get_profile_image, class: 'rounded-circle', size: '50x50' %>
       <%= @post.user.name %>
     <% end %>
 

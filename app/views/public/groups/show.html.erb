@@ -52,7 +52,7 @@
   <% @users.each do |user| %>
     <%= link_to user_path(user) do %>
       <div class="user px-5 text-dark">
-        <%= image_tag user.get_profile_image(50,50) %>
+        <%= image_tag user.get_profile_image, class: 'rounded-circle', size: '50x50' %>
         <%= user.name %>
       </div>
     <% end %>
