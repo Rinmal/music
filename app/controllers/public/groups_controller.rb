@@ -2,6 +2,7 @@ class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :group_exist?, only: [:show, :chat]
   before_action :is_matching_login_user, only: [:edit, :update]
+  # application_controllerに記載
   before_action :ensure_guest_user, only: [:new, :create, :join]
   before_action :is_user_frozen
 
@@ -53,7 +54,7 @@ class Public::GroupsController < ApplicationController
   def join
     @group = Group.find(params[:group_id])
     @group.users << current_user
-    redirect_to groups_path
+    redirect_to group_path(@group)
   end
 
   def chat
@@ -82,18 +83,4 @@ class Public::GroupsController < ApplicationController
     end
   end
 
-# ゲストログイン時の利用制限
-  def ensure_guest_user
-    if current_user.name == "ゲストユーザー"
-      redirect_to user_path(current_user), notice: 'ゲストユーザーは閲覧用のみ利用可能です'
-    end
-  end
-
-# 凍結時の利用制限
-  def is_user_frozen
-    @user = current_user
-    if @user.is_frozen == true
-      redirect_to posts_path, alert: 'このアカウントは停止されました'
-    end
-  end
 end

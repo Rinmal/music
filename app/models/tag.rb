@@ -9,8 +9,12 @@ class Tag < ApplicationRecord
   def self.search(word)
     if word != '#'
       search = word.delete('#')
-      tag = Tag.where(body: search)
-      tag[0].posts
+      tag = Tag.where('body LIKE(?)' , "%#{search}%")
+      if tag.exists?
+        tag[0].posts
+      else
+        Post.where('body LIKE(?)' , "%#{search}%")
+      end
     else
       Post.all
     end

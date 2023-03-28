@@ -10,4 +10,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # ゲストログイン時の利用制限
+  def ensure_guest_user
+    if current_user.name == "ゲストユーザー"
+      redirect_to posts_path, notice: 'ゲストユーザは閲覧用のみ利用可能です'
+    end
+  end
+
+  # 凍結時の利用制限
+  def is_user_frozen
+    @user = current_user
+    if @user.is_frozen == true
+      redirect_to posts_path, alert: 'このアカウントは停止されました'
+    end
+  end
+
 end

@@ -44,12 +44,14 @@
               <span>ログアウト</span>
             <% end %>
           </li>
-          <li>
-            <%= link_to user_unsubscribe_path(current_user), class: 'btn btn-lg' do %>
-              <i class="fa-solid fa-user-minus"></i>
-              <span>退会する</span>
-            <% end %>
-          </li>
+          <% unless current_user.name == 'ゲストユーザー' %>
+            <li>
+              <%= link_to user_unsubscribe_path(current_user), class: 'btn btn-lg' do %>
+                <i class="fa-solid fa-user-minus"></i>
+                <span>退会する</span>
+              <% end %>
+            </li>
+          <% end %>
 
         <% elsif admin_signed_in? %>
           <br>

@@ -12,7 +12,7 @@ class Admin::GroupsController < ApplicationController
 
   def chat
     @group = Group.find_by(id: params[:id])
-    @messages = @group.messages
+    @messages = @group.messages.order('created_at DESC')
   end
 
 end

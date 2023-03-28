@@ -1,5 +1,7 @@
 class Public::FavoritesController < ApplicationController
+  # application_controllerに記載
   before_action :ensure_guest_user
+  before_action :is_user_frozen
 
 # 非同期通信
   def create
@@ -15,12 +17,4 @@ class Public::FavoritesController < ApplicationController
     favorite.destroy
   end
 
-  private
-
-# ゲストログイン時の利用制限
-  def ensure_guest_user
-    if current_user.name == "ゲストユーザー"
-      redirect_to user_path(current_user), notice: 'ゲストユーザーは閲覧用のみ利用可能です'
-    end
-  end
 end
