@@ -14,7 +14,8 @@ class Public::CommentsController < ApplicationController
 
 # 非同期通信
   def destroy
-    @comments = Comment.all
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
     @comment = Comment.new
     Comment.find(params[:id]).destroy
   end
