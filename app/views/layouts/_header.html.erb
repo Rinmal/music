@@ -3,7 +3,7 @@
     <nav class="navbar navbar-dark flex-lg-column">
       <div class="title">
         <a clss="navbar-braand" href="/">
-          <img class="logo" src="assets/IMG_4364.png" alt="">
+          <%= image_tag asset_path('IMG_4364.png'), class: 'logo', alt: "" %>
           <span class="text-dark">音の広場</span>
         </a>
       </div>
@@ -13,13 +13,13 @@
           <li>
             <%= link_to posts_path, class: 'btn btn-lg' do %>
               <i class="fa-solid fa-house-chimney"></i>
-              <span>ホーム</span>
+              <span class="text">ホーム</span>
             <% end %>
           </li>
           <li>
             <%= link_to user_path(current_user.id), class: 'btn btn-lg' do %>
               <i class="fa-solid fa-user"></i>
-              <span>マイページ</span>
+              <span class="text">マイページ</span>
             <% end %>
           </li>
 
@@ -27,7 +27,7 @@
             <li>
               <%= link_to new_post_path, class: 'btn btn-lg' do %>
                 <i class="fa-solid fa-pen-to-square"></i>
-                <span>投稿する</span>
+                <span class="text">投稿する</span>
               <% end %>
             </li>
           <% end %>
@@ -35,20 +35,20 @@
           <li>
             <%= link_to groups_path, class: 'btn btn-lg' do %>
               <i class="fa-solid fa-users"></i>
-              <span>グループ</span>
+              <span class="text">グループ</span>
             <% end %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, class: 'btn btn-lg', method: :delete do %>
               <i class="fa-solid fa-right-from-bracket"></i>
-              <span>ログアウト</span>
+              <span class="text">ログアウト</span>
             <% end %>
           </li>
           <% unless current_user.name == 'ゲストユーザー' %>
             <li>
               <%= link_to user_unsubscribe_path(current_user), class: 'btn btn-lg' do %>
                 <i class="fa-solid fa-user-minus"></i>
-                <span>退会する</span>
+                <span class="text">退会する</span>
               <% end %>
             </li>
           <% end %>
@@ -58,25 +58,25 @@
           <li>
             <%= link_to admin_users_path, class: 'btn btn-lg' do %>
             <i class="fa-solid fa-user"></i>
-            <span>ユーザー一覧</span>
+            <span class="text">ユーザー一覧</span>
             <% end %>
           </li>
           <li>
             <%= link_to admin_posts_path, class: 'btn btn-lg' do %>
               <i class="fa-regular fa-folder-closed"></i>
-              <span>投稿一覧</span>
+              <span class="text">投稿一覧</span>
             <% end %>
           </li>
           <li>
             <%= link_to admin_groups_path, class: 'btn btn-lg' do %>
               <i class="fa-solid fa-users"></i>
-              <span>グループ一覧</span>
+              <span class="text">グループ一覧</span>
             <% end %>
           </li>
           <li>
             <%= link_to destroy_admin_session_path, class: 'btn btn-lg', method: :delete do %>
               <i class="fa-solid fa-right-from-bracket"></i>
-              <span>ログアウト</span>
+              <span class="text">ログアウト</span>
             <% end %>
           </li>
 
@@ -87,13 +87,13 @@
         <li>
           <%= link_to new_user_session_path, class: 'btn btn-lg' do %>
             <i class="fa-solid fa-right-to-bracket"></i>
-            <span>ログイン</span>
+            <span class="text">ログイン</span>
           <% end %>
         </li>
         <li>
           <%= link_to new_user_registration_path, class: 'btn btn-lg' do %>
             <i class="fa-solid fa-user-plus"></i>
-            <span>新規登録</span>
+            <span class="text">新規登録</span>
           <% end %>
         </li>
         <% end %>
