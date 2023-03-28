@@ -19,8 +19,8 @@
 - 新曲発表時
 - ライブの前後
 
-## 設計書
-<...>
+## ER図
+![ER_音の広場 drawio](https://user-images.githubusercontent.com/121992801/228185592-23545d87-91be-44b9-9112-864f3334963e.png)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -30,4 +30,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中です。
+ユーザーのアイコンを以下のサイトから利用させていただきました。
+  - https://www.photo-ac.com/
