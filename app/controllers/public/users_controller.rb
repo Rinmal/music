@@ -56,6 +56,19 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :introduction, :profile_image)
+  end
+
+  def is_matching_login_user
+    user_id = params[:id].to_i
+    unless user_id == current_user.id
+      redirect_to user_path(current_user.id)
+    end
+  end
+
 # 存在しないユーザーに飛べないようにする
   def user_exist?
     unless User.find_by(id: params[:id])
