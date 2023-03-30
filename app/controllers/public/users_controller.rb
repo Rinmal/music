@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
-  before_action :user_exist?, only: [:show, :is_deleted]
+  before_action :user_exist?, only: [:show]
   # application_controllerに記載
   before_action :ensure_guest_user, only: [:edit, :update]
   before_action :is_user_frozen, except: [:show]
@@ -32,8 +32,15 @@ class Public::UsersController < ApplicationController
     end
   end
 
-# 論理削除による退会機能
   def unsubscribe
+    @user = User.find(params[:user_id])
+    unless @user.id == current_user.id
+      redirect_to posts_path
+    end
+  end
+
+# 論理削除による退会機能
+  def is_deleted
     @user = current_user
     if @user.update(is_deleted: true)
       reset_session
@@ -42,13 +49,6 @@ class Public::UsersController < ApplicationController
       render "unsubscribe"
     end
   end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:name, :introduction, :profile_image)
-  end
-
   def is_matching_login_user
     user_id = params[:id].to_i
     unless user_id == current_user.id
