@@ -59,7 +59,7 @@ class Public::GroupsController < ApplicationController
 
   def chat
     @group = Group.find(params[:id])
-    if @group.users.exists?(id: current_user.id)
+    if @group.users.include?(current_user)
       @messages = @group.messages.order('created_at DESC')
       @message = Message.new
     else
