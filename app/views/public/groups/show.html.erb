@@ -30,12 +30,10 @@
         <%= link_to "退室", group_path(@group), method: :delete, class: 'btn btn-sm btn-outline-danger col-7 col-md-5 ml-3' %>
 
       <% elsif current_user.name == 'ゲストユーザー' %>
-        <%= link_to chat_group_path(@group) do %>
-          <div class="col-5">
-            <i class="fa-regular fa-comments h4 text-dark"></i>
-          </div>
-        <% end %>
-
+        <p>
+          登録してグループに<br>
+          参加してみましょう
+        </p>
       <% else %>
         <%= link_to "参加", group_join_path(@group), class: 'btn btn-sm btn-outline-success' %>
       <% end %>

@@ -3,7 +3,7 @@ class Public::GroupsController < ApplicationController
   before_action :group_exist?, only: [:show, :chat]
   before_action :is_matching_login_user, only: [:edit, :update]
   # application_controllerに記載
-  before_action :ensure_guest_user, only: [:new, :create, :join]
+  before_action :ensure_guest_user, only: [:new, :create, :join, :chat]
   before_action :is_user_frozen
 
   def index
@@ -59,8 +59,12 @@ class Public::GroupsController < ApplicationController
 
   def chat
     @group = Group.find(params[:id])
-    @messages = @group.messages.order('created_at DESC')
-    @message = Message.new
+    if @group.users.include?(current_user)
+      @messages = @group.messages.order('created_at DESC')
+      @message = Message.new
+    else
+      redirect_to group_path(@group)
+    end
   end
 
   private
