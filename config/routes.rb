@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show, :update] do
       patch 'is_freezed' => 'users#is_freezed'
+      get :followings, on: :member
+      get :followers, on: :member
     end
 
     resources :groups, only: [:index, :show] do
@@ -48,6 +50,9 @@ Rails.application.routes.draw do
       get 'unsubscribe' => 'users#unsubscribe'
       patch 'is_deleted' => 'users#is_deleted'
       get 'favorites' => 'favorites#index'
+      resource :relationships, only: [:create, :destroy]
+      get :followings, on: :member
+      get :followers, on: :member
     end
 
     resources :groups do

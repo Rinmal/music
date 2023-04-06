@@ -14,6 +14,14 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
 
+  # フォローするユーザー
+  has_many :relationships, foreign_key: :following_id
+  has_many :followings, through: :relationships, source: :follower
+
+  # フォローされるユーザー
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: :follower_id
+  has_many :followers, through: :reverse_of_relationships, source: :following
+
   validates :name, length: {minimum: 2, maximum: 20 },uniqueness: true
   validates :introduction, length: {maximum: 50 }
 
@@ -31,6 +39,10 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.email = "guest@example.com"
     end
+  end
+
+  def is_followed_by?(user)
+    reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
 end

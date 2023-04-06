@@ -5,9 +5,19 @@
     <%= image_tag @user.get_profile_image, class: 'rounded-circle', size: '80x80' %>
     <span class="pl-4"><%= @user.name %></span>
     <div class="float-right mt-3 mr-4">
-      <% if (@user.id == current_user.id) && (@user.name != 'ゲストユーザー') %>
-        <%= link_to edit_user_path do %>
-          <i class="fa-solid fa-gear text-dark"></i>
+      <% unless @user.name == 'ゲストユーザー' %>
+        <% if @user.id == current_user.id %>
+          <%= link_to edit_user_path do %>
+            <i class="fa-solid fa-gear text-dark"></i>
+          <% end %>
+        <% elsif @user.is_followed_by?(current_user) %>
+          <%= link_to user_relationships_path(@user), method: :delete do %>
+            <button class="btn btn-outline-info">フォロー外す</button>
+          <% end %>
+        <% else %>
+          <%= link_to user_relationships_path(@user), method: :post do %>
+            <button class="btn btn-outline-success">フォローする</button>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -15,6 +25,18 @@
 
   <div class="introduction pt-3 px-3">
     <%= @user.introduction %>
+  </div>
+
+  <div class="follow">
+    <p class="text-small">
+      <%= link_to followings_user_path(@user), class: 'text-dark' do %>
+        <%= @user.followings.count %> フォロー
+      <% end %>
+      &emsp;
+      <%= link_to followers_user_path(@user), class: 'text-dark' do %>
+        <%= @user.followers.count %> フォロワー
+      <% end %>
+    </p>
   </div>
 </div>
 

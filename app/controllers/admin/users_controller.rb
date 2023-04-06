@@ -19,6 +19,16 @@ class Admin::UsersController < ApplicationController
     redirect_back fallback_location: admin_root_path
   end
 
+  def followings
+    user = User.find(params[:id])
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+
   private
 
   def update_params

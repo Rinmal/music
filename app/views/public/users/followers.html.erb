@@ -1,0 +1,32 @@
+<h2>フォロワー</h2>
+
+<div class="row mt-5">
+  <table class="table col-8 offset-2">
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= image_tag user.get_profile_image, class: 'rounded-circle', size: '50x50' %></td>
+          <td>
+            <%= link_to user_path(user), class: 'text-dark' do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td>
+           <% unless current_user.name == 'ゲストユーザー' %>
+              <% if user.is_followed_by?(current_user) %>
+                <%= link_to user_relationships_path(user), method: :delete do %>
+                  <button class="btn btn-sm btn-outline-info">フォロー外す</button>
+                <% end %>
+              <% else %>
+                <%= link_to user_relationships_path(@user), method: :post do %>
+                  <button class="btn btn-sm btn-outline-success">フォローする</button>
+                <% end %>
+              <% end %>
+           <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
