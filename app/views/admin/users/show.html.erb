@@ -25,6 +25,18 @@
   <div class="introduction pt-3 px-3">
     <%= @user.introduction %>
   </div>
+
+  <div class="follow">
+    <p class="text-small">
+      <%= link_to followings_admin_user_path(@user), class: 'text-dark' do %>
+        <%= @user.followings.count %> フォロー
+      <% end %>
+      &emsp;
+      <%= link_to followers_admin_user_path(@user), class: 'text-dark' do %>
+        <%= @user.followers.count %> フォロワー
+      <% end %>
+    </p>
+  </div>
 </div>
 
 <div class="wrap">
